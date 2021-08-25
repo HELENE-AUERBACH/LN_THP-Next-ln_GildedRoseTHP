@@ -7,8 +7,8 @@ describe("GildedRose shop manager", function () {
   });
 
   it("Baisser de 1 la qualité et sellIn d'item normaux", function () {
-    listItems.push(new Item("+5 Dexterity Vest", 10, 20));
-    listItems.push(new Item("Mana Cake", 3, 6));
+    listItems.push(Item.createItem("+5 Dexterity Vest", 10, 20));
+    listItems.push(Item.createItem("Mana Cake", 3, 6));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateQuality();
@@ -24,8 +24,8 @@ describe("GildedRose shop manager", function () {
   });
 
   it("Baisser de 2 la qualité et de 1 le sellIn d'items préfixés par \"Conjured\"", function () {
-    listItems.push(new Item("Conjured Dark Blade", 10, 20));
-    listItems.push(new Item("Conjured Magic Stick", 3, 6));
+    listItems.push(Item.createItem("Conjured Dark Blade", 10, 20));
+    listItems.push(Item.createItem("Conjured Magic Stick", 3, 6));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateQuality();
@@ -41,10 +41,10 @@ describe("GildedRose shop manager", function () {
   });
 
   it("Baisser de 2 la qualité d'item normaux une fois que la date de péremption est passée", function () {
-    listItems.push(new Item("+5 Dexterity Vest", 0, 20));
-    listItems.push(new Item("Mana Cake", 0, 6));
-    listItems.push(new Item("+5 Dexterity Vest", -5, 10));
-    listItems.push(new Item("Mana Cake", -1, 4));
+    listItems.push(Item.createItem("+5 Dexterity Vest", 0, 20));
+    listItems.push(Item.createItem("Mana Cake", 0, 6));
+    listItems.push(Item.createItem("+5 Dexterity Vest", -5, 10));
+    listItems.push(Item.createItem("Mana Cake", -1, 4));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateQuality();
@@ -62,10 +62,10 @@ describe("GildedRose shop manager", function () {
   });
 
   it("La qualité d'un produit ne peut jamais être négative", function () {
-    listItems.push(new Item("+5 Dexterity Vest", 0, 1));
-    listItems.push(new Item("Mana Cake", 1, 0));
-    listItems.push(new Item("Conjured Dark Blade", 0, 2));
-    listItems.push(new Item("Conjured Magic Stick", -3, 0));
+    listItems.push(Item.createItem("+5 Dexterity Vest", 0, 1));
+    listItems.push(Item.createItem("Mana Cake", 1, 0));
+    listItems.push(Item.createItem("Conjured Dark Blade", 0, 2));
+    listItems.push(Item.createItem("Conjured Magic Stick", -3, 0));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateQuality();
@@ -83,8 +83,8 @@ describe("GildedRose shop manager", function () {
   });
 
   it("Augmenter la qualité de 1 pour Aged Brie et Backstage passes", function () {
-    listItems.push(new Item("Aged Brie", 20, 30));
-    listItems.push(new Item("Backstage passes to a TAFKAL80ETC concert", 20, 30));
+    listItems.push(Item.createItem("Aged Brie", 20, 30));
+    listItems.push(Item.createItem("Backstage passes to a TAFKAL80ETC concert", 20, 30));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateQuality();
@@ -100,10 +100,10 @@ describe("GildedRose shop manager", function () {
   });
 
   it("Augmenter la qualité de 2 pour Backstage passes quand il reste 10 jours ou moins, mais plus de 5 jours", function () {
-    listItems.push(new Item("Aged Brie", 10, 20));
-    listItems.push(new Item("Backstage passes to a TAFKAL80ETC concert", 10, 20));
-    listItems.push(new Item("Aged Brie", 8, 10));
-    listItems.push(new Item("Backstage passes to a TAFKAL80ETC concert", 6, 8));
+    listItems.push(Item.createItem("Aged Brie", 10, 20));
+    listItems.push(Item.createItem("Backstage passes to a TAFKAL80ETC concert", 10, 20));
+    listItems.push(Item.createItem("Aged Brie", 8, 10));
+    listItems.push(Item.createItem("Backstage passes to a TAFKAL80ETC concert", 6, 8));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateQuality();
@@ -121,10 +121,10 @@ describe("GildedRose shop manager", function () {
   });
 
   it("Augmenter la qualité de 3 pour Backstage passes quand il reste 5 jours ou moins, mais plus de 0 jour", function () {
-    listItems.push(new Item("Aged Brie", 5, 20));
-    listItems.push(new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20));
-    listItems.push(new Item("Aged Brie", 3, 10));
-    listItems.push(new Item("Backstage passes to a TAFKAL80ETC concert", 1, 7));
+    listItems.push(Item.createItem("Aged Brie", 5, 20));
+    listItems.push(Item.createItem("Backstage passes to a TAFKAL80ETC concert", 5, 20));
+    listItems.push(Item.createItem("Aged Brie", 3, 10));
+    listItems.push(Item.createItem("Backstage passes to a TAFKAL80ETC concert", 1, 7));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateQuality();
@@ -142,11 +142,11 @@ describe("GildedRose shop manager", function () {
   });
 
   it("La qualité d'un produit n'est jamais de plus de 50", function () {
-    listItems.push(new Item("Aged Brie", 10, 50));
-    listItems.push(new Item("Backstage passes to a TAFKAL80ETC concert", 8, 50));
-    listItems.push(new Item("Aged Brie", 3, 50));
-    listItems.push(new Item("Backstage passes to a TAFKAL80ETC concert", 5, 50));
-    listItems.push(new Item("Aged Brie", 0, 50));
+    listItems.push(Item.createItem("Aged Brie", 10, 50));
+    listItems.push(Item.createItem("Backstage passes to a TAFKAL80ETC concert", 8, 50));
+    listItems.push(Item.createItem("Aged Brie", 3, 50));
+    listItems.push(Item.createItem("Backstage passes to a TAFKAL80ETC concert", 5, 50));
+    listItems.push(Item.createItem("Aged Brie", 0, 50));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateQuality();
@@ -165,11 +165,11 @@ describe("GildedRose shop manager", function () {
   });
 
   it("La qualité tombe à 0 après le concert pour Backstage passesi, mais augmente de 2 pour Aged Brie jusqu'à 50", function () {
-    listItems.push(new Item("Aged Brie", -1, 20));
-    listItems.push(new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20));
-    listItems.push(new Item("Aged Brie", 0, 7));
-    listItems.push(new Item("Backstage passes to a TAFKAL80ETC concert", -1, 0));
-    listItems.push(new Item("Aged Brie", -20, 49));
+    listItems.push(Item.createItem("Aged Brie", -1, 20));
+    listItems.push(Item.createItem("Backstage passes to a TAFKAL80ETC concert", 0, 20));
+    listItems.push(Item.createItem("Aged Brie", 0, 7));
+    listItems.push(Item.createItem("Backstage passes to a TAFKAL80ETC concert", -1, 0));
+    listItems.push(Item.createItem("Aged Brie", -20, 49));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateQuality();
@@ -188,10 +188,10 @@ describe("GildedRose shop manager", function () {
   });
 
   it("La qualité de Sulfuras ne se modifie pas", function () {
-    listItems.push(new Item("Sulfuras, Hand of Ragnaros", 20, 80));
-    listItems.push(new Item("Sulfuras, Hand of Ragnaros", 10, 80));
-    listItems.push(new Item("Sulfuras, Hand of Ragnaros", 5, 80));
-    listItems.push(new Item("Sulfuras, Hand of Ragnaros", 1, 80));
+    listItems.push(Item.createItem("Sulfuras, Hand of Ragnaros", 20, 80));
+    listItems.push(Item.createItem("Sulfuras, Hand of Ragnaros", 10, 80));
+    listItems.push(Item.createItem("Sulfuras, Hand of Ragnaros", 5, 80));
+    listItems.push(Item.createItem("Sulfuras, Hand of Ragnaros", 1, 80));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateQuality();
